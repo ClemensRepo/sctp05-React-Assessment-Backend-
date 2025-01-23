@@ -2,8 +2,10 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+
 // make sure this comes AFTER dotenv config
 const productsRouter = require('./routes/products');
+const userRoutes = require('./routes/users');
 
 const app = express();
 
@@ -18,6 +20,9 @@ app.use('/api/products', productsRouter);
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to our e-commerce API' });
 });
+
+
+app.use('/api/users', userRoutes);
 
 // Start server
 const PORT = process.env.PORT || 3000;
