@@ -6,6 +6,7 @@ require('dotenv').config();
 // make sure this comes AFTER dotenv config
 const productsRouter = require('./routes/products');
 const userRoutes = require('./routes/users');
+const cartRoutes = require('./routes/cart');
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.use(express.json());
 
 // Routes
 app.use('/api/products', productsRouter);
+app.use('/api/users', userRoutes);
+app.use('/api/cart', cartRoutes);
 
 // Basic route
 app.get('/', (req, res) => {

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userService = require('../services/userService');
 const jwt = require('jsonwebtoken');
+const AuthenticateWithJWT = require("../middlewares/AuthenticateWithJWT");
 
 // POST register a new user
 router.post('/register', async (req, res) => {
@@ -39,7 +40,7 @@ router.post('/login', async (req, res) => {
     const user = await userService.loginUser(email, password);
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     
-    res.json({ message: "Login successful", token, { user_id: user.id });
+    res.json({ message: "Login successful"}, token, { user_id: user.id });
   } catch (error) {
     res.status(401).json({ message: error.message });
   }
